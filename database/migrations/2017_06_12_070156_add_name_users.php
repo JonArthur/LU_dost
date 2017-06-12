@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddJobDescription extends Migration
+class AddNameUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddJobDescription extends Migration
      */
     public function up()
     {
-        Schema::table('admin', function (Blueprint $table) {
-            $table->string('job_description')->after('last_name');
+        Schema::table('users', function (Blueprint $table) {
+          $table->dropColumn(['first_name', 'last_name']);
+          $table->string('name')->after('id');
         });
     }
 
@@ -25,7 +26,7 @@ class AddJobDescription extends Migration
      */
     public function down()
     {
-        Schema::table('admin', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

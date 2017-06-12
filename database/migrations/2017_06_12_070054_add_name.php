@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddJobDescription extends Migration
+class AddName extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AddJobDescription extends Migration
     public function up()
     {
         Schema::table('admin', function (Blueprint $table) {
-            $table->string('job_description')->after('last_name');
+          $table->dropColumn(['first_name', 'last_name']);
+          $table->string('name')->after('id');
         });
     }
 
