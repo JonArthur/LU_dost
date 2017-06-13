@@ -14,6 +14,17 @@
 
 Auth::routes();
 Route::resource('guard','GuardController');
+
+
+Route::get('visitor', ['middleware' => [ 'auth:admin'], function() {
+  return view('visitor.index');
+}]);
+Route::get('visitor', ['middleware' => ['auth'], function() {
+  return view('visitor.index');
+}]);
+
+Route::resource('visitor','VisitorController');
+
 Route::get('/users/logout','Auth\LoginController@userLogout')->name('user.logout');
 Route::get('/',function()
 {

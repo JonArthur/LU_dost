@@ -65,7 +65,8 @@
                                           </a>
                                         </li>
                                       @endif
-
+                                      <li><a href="{{ route('visitor.create') }}"> AddVisitors</a></li>
+                                      <li><a href="{{ route('visitor.index') }}"> View Visitors</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
