@@ -52,6 +52,20 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+
+                                      @if (Auth::user()->job_description == 'admin')
+                                        <li>
+                                          <a href="{{ route('guard.create') }}">
+                                            Add Guard
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a href="{{ route('guard.index') }}">
+                                            View Guards
+                                          </a>
+                                        </li>
+                                      @endif
+
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -70,9 +84,30 @@
                 </div>
             </div>
         </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                  @if (Session::has('success'))
+                    <div class="alert alert-success" role="alert">
+                      <strong>Success:</strong>{{ Session::get('success')}}
+                    </div>
+                  @endif
+                  @if (!$errors->isEmpty())
+                    <div class="alert alert-danger" role="alert">
+                      <strong>Errors:</strong>
+                      <ul>
+                        @foreach($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  @endif
+                </div>
+              </div>
+            </div>
+          @yield('content')
 
-        @yield('content')
-    </div>
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

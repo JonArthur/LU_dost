@@ -13,7 +13,8 @@
 
 
 Auth::routes();
-Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout');
+Route::resource('guard','GuardController');
+Route::get('/users/logout','Auth\LoginController@userLogout')->name('user.logout');
 Route::get('/',function()
 {
   return view('welcome');
