@@ -22,8 +22,14 @@
                       <td> {{ $guard->id  }} </td>
                       <td> {{ $guard->name  }} </td>
                       <td> {{ $guard->email  }} </td>
-                      <td> <a href={{route('guard.create',$guard->id)}} class="btn btn-primary"> Edit Guard </a> </td>
-                       <td> <a href={{route('guard.destroy',$guard->id)}} class="btn btn-warning"> Delete Guard </a> </td>
+                      <td> <a href={{route('guard.edit',$guard->id)}} class="btn btn-primary btn-bl"> Edit Guard </a> </td>
+                       <td>
+                         <form method="POST" action="{{ route('guard.destroy', $guard->id) }}">
+                           <input type="submit" value="Delete" class="btn btn-danger btn-block">
+                           <input type="hidden" name="_token" value="{{ Session::token() }}">
+                           {{ method_field('DELETE') }}
+                         </form>﻿
+                        </td>
                     </tr>
                   @endforeach
                   </table>

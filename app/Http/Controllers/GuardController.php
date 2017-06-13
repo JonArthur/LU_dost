@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\User;
 use Session;
+use Illuminate\Validation\Rule;
+
 
 class GuardController extends Controller
 {
@@ -77,7 +79,9 @@ class GuardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $guard = User::find($id);
+
+        return view('guard.edit')->withGuard($guard);
     }
 
     /**
@@ -89,7 +93,22 @@ class GuardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+
+
+        $this->validate($request,[
+          'name'=>'required|min:6|max:191',
+          'email' => Rule::unique('users')->ignore($id),
+          'password'=>'required|min:6|max:191'
+        ]);
+
+        $guard = User::find($id);
+        $guard->name = $request->name;
+        $guard->email = $request->email;
+        $guard->password = Hash::make($request->password);
+        $guard->save();
+        $guards = User::all();
+        return view('guard.index')->withGuards($guards);
     }
 
     /**
@@ -100,6 +119,10 @@ class GuardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $guard = User::find($id);
+        $guard->delete();
+
+        Session::flash('success','Guard Success Deleted');
+        return redirect()->route('guard.index');
     }
 }
