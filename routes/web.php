@@ -22,10 +22,11 @@ Route::get('visitor', ['middleware' => [ 'auth:admin'], function() {
 Route::get('visitor', ['middleware' => ['auth'], function() {
   return view('visitor.index');
 }]);
-
+Route::get('/visitor/comment',['as'=>'visitor.comment','uses'=>'VisitorController@showComment']);
 Route::resource('visitor','VisitorController');
 
 Route::get('/users/logout','Auth\LoginController@userLogout')->name('user.logout');
+
 Route::get('/',function()
 {
   return view('welcome');

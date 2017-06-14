@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Guard
                 </div>
-
+                
                 <div class="panel-body">
                   <table class="table">
                     <tr>
@@ -47,6 +47,7 @@
                       @endforeach
 
                   </table>
+                    {!! $visitors->links(); !!}
                 </div>
 
         </div>

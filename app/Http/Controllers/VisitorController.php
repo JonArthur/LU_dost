@@ -11,7 +11,7 @@ class VisitorController extends Controller
 
     public function index()
     {
-        $visitors = Visitor::all();
+        $visitors = Visitor::orderBy('id','desc')->paginate(10);
         return view('visitor.index')->withVisitors($visitors);
     }
 
@@ -113,5 +113,10 @@ class VisitorController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function showComment()
+    {
+          $comments = Visitor::all();
+          return view('visitor.show_comment')->withComments($comments);
     }
 }
